@@ -4,7 +4,23 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To Issue Tracker</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Welcome!  @Model.Caption</h2>
+<ul class="list-unstyled">
+	@if (Model.Issues.Count == 0)
+	{
+	<h2>No Open Issues!  YAY!</h2>
+	}
+	else
+	{
+		@foreach (var issue in Model.Issues)
+		{
+			<li class="alert alert-info">
+				<span>@issue.Description</span>
+				<a class="btn btn-primary btn-sm" asp-page="Details" asp-route-id="@issue.Id">Details</a>
+			</li>
+		}
+	}
+
+</ul>
+
+<a asp-page="Create" class="btn btn-primary">Add A New Issue</a>
